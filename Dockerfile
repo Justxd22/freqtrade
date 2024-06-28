@@ -28,6 +28,8 @@ RUN  apt-get update \
   && pip install --upgrade "pip<=24.0" wheel
 
 # Install TA-lib
+RUN mkdir /freqtrade/user_data/
+COPY user_data/* /freqtrade/user_data/
 COPY build_helpers/* /tmp/
 RUN cd /tmp && /tmp/install_ta-lib.sh && rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
@@ -50,7 +52,6 @@ USER ftuser
 COPY --chown=ftuser:ftuser . /freqtrade/
 
 RUN pip install -e . --user --no-cache-dir --no-build-isolation \
-  && mkdir /freqtrade/user_data/ \
   && freqtrade install-ui
 
 ENTRYPOINT ["freqtrade"]
