@@ -56,5 +56,5 @@ RUN pip install -e . --user --no-cache-dir --no-build-isolation \
 
 ENTRYPOINT ["freqtrade"]
 # Default to trade mode
-CMD [ "trade",
-      "--strategy", "SampleStrategy"]
+CMD ["trade", \
+     "--strategy", "SampleStrategy"]
